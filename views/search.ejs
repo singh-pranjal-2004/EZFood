@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Dishes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="preload" as="image" href="./assets/images/hero-slider-1.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-2.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-3.jpg">
+    <style>
+        body {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            font-family: Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-form {
+            display: flex;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            height: 40px;
+            border-radius: 20px;
+            border: 2px solid white;
+            padding: 0 15px;
+            color: #fff;
+            font-size: 18px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        input[type="submit"] {
+            margin-left: 10px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: green;
+            color: #fff;
+            border: 1px solid white;
+            padding: 0 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: blueviolet;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px;
+            display: flex;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .card-photo {
+            width: 40%;
+            margin-right: 20px;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .card-photo img {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .card-content {
+            width: 60%;
+        }
+
+        .card-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .card-description {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .card-address {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .card-location {
+            font-size: 14px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .card-location iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        .card-price {
+            font-size: 20px;
+            color: #fff;
+            font-weight: bold;
+            margin-top: auto;
+        }
+
+        @media screen and (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            input[type="text"] {
+                width: 200px;
+                font-size: 16px;
+            }
+
+            input[type="submit"] {
+                padding: 0 15px;
+                font-size: 16px;
+            }
+
+            .card {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card-photo {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .card-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preload" data-preaload>
+        <div class="circle"></div>
+        <p class="text">EZ Food</p>
+      </div>
+    <h1>Search Dishes</h1>
+    <div class="search-container">
+        <form class="search-form" action="/search" method="GET">
+            <input type="text" name="term" placeholder="Search by name...">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <hr>
+    <h2>Search Results</h2>
+    <% dishes.forEach(dish=> { %>
+        <div class="container">
+            <div class="card">
+                <div class="card-photo">
+                    <img src=<%=dish.photo %> alt="Photo">
+                    <div class="card-address">
+                        <%= dish.address %>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-name">
+                        <%= dish.name %>
+                    </div>
+                    <div class="card-description">
+                        <%= dish.description %>
+                    </div>
+                    <div class="card-price">&#8377;<%= dish.price %></div>
+                    <div class="card-location">
+                        <iframe src="<%= dish.location %>" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="filter: invert(1);"></iframe>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <% }); %>
+        <script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>

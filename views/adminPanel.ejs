@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Register App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="preload" as="image" href="./assets/images/hero-slider-1.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-2.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-3.jpg">
+
+    <style>
+        body {
+            background-image: url(assets/images/hero-slider-2.jpg);
+            background-position: center;
+            height: 100vh;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .form-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid white;
+            padding: 60px;
+            border-radius: 30px;
+            color: white;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            border-radius: 20px;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .btn-success {
+            background-color: hsl(38, 61%, 73%);
+            border-color: hsl(38, 61%, 73%);
+        }
+
+        .btn-success:hover {
+            background-color: black;
+            border-color: hsl(38, 61%, 73%)white;
+        }
+
+        .mssg {
+            margin-top: 30px;
+            color: red;
+        }
+
+        a {
+            color: green;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .form-card {
+                padding: 40px;
+                max-width: 300px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preload" data-preaload>
+        <div class="circle"></div>
+        <p class="text">EZ Food</p>
+      </div>
+    <div class="form-card">
+        <h1>Welcome, Admin!</h1>
+        <div class="form-group">
+            <a href="/displayFeedback"><button class="btn btn-success">View Feedback</button></a>
+            <a href="/displayUsers"><button class="btn btn-success">View Users</button></a>
+            <a href="/addDish"><button class="btn btn-success">Add Dish</button></a>
+        </div>
+        <div class="mssg">
+            <span id="check"></span>
+        </div>
+        <div class="form-group">
+            <a href="/" id="aa">Logout</a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feedback Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="preload" as="image" href="./assets/images/hero-slider-1.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-2.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-3.jpg">
+
+    <style>
+        body {
+            background-image: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-position: center;
+            height: 100vh;
+            background-size: cover;
+            background-repeat: no-repeat;
+            text-align: center !important;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 30px;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        .form-card {
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(.5px);
+            border: 2px solid white;
+            box-shadow: 0px 0px 60px rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 30px;
+            border-radius: 10px;
+            margin-top: 130px;
+        }
+
+        .form-card p {
+            color: #fff;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .form-control::placeholder {
+            color: rgba(0, 0, 0, 0.534);
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .form-control {
+            border: 2px solid white;
+            border-radius: 10px;
+            height: 40px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            transition: 0.2s ease-out;
+        }
+
+        .form-control:focus {
+            border-color: violet;
+            color: black;
+            scale: 1.05;
+        }
+
+        .btn-success {
+            margin-top: 10px;
+            background-color: green;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 5px 20px;
+            border: 1px solid white;
+            border-radius: 20px;
+            transition: 0.2s ease-out;
+        }
+
+        .btn-success:hover {
+            background-color: blueviolet;
+            border-color: blueviolet;
+            box-shadow: 0px 0px 20px white;
+        }
+
+        .mssg {
+            margin-top: 10px;
+            text-align: center;
+            background-color: transparent;
+            color: red;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .mssg span {
+            display: block;
+        }
+
+        .mssg.bg-success span {
+            background-color: #28a745;
+        }
+
+        a {
+            color: green;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: violet;
+        }
+
+        #ar-log {
+            color: white;
+        }
+
+        #LangTable {
+            margin-bottom: 15px;
+        }
+
+        /* Styles for back to home button */
+        .back-to-home-btn {
+            margin-top: 20px;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-home-btn:hover {
+            background-color: #555;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(() => {
+
+            $("#feedbackForm").submit((event) => {
+                event.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/feed', // Change the URL to your feedback submission endpoint
+                    data: $('#feedbackForm').serialize(),
+                    dataType: "json",
+                    success: (response) => {
+    document.getElementById("feedbackMessage").className = 'mssg bg-success';
+    document.getElementById("feedbackMessage").innerHTML = response.message;
+
+    setTimeout(() => {
+        $('#feedbackForm')[0].reset();
+        document.getElementById("feedbackMessage").innerHTML = "";
+        document.getElementById("feedbackMessage").className = 'mssg bg-danger'; // Reset to default styling if needed
+    }, 5000); // Adjust timing as needed
+},
+
+                    success: (response) => {
+                        $('#feedbackForm')[0].reset();
+
+                        document.getElementById("feedbackMessage").innerHTML = response.message;
+
+                        setTimeout(() => {
+                            document.getElementById("feedbackMessage").innerHTML = "";
+                            window.location.href='/';
+                        }, 3000);
+                    },
+                    error: () => {}
+                })
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="preload" data-preaload>
+        <div class="circle"></div>
+        <p class="text">EZ Food</p>
+      </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 form-card">
+                <div>
+                    <p>Leave Your Feedback</p>
+                </div>
+                <div class="form-group">
+                    <form id="feedbackForm" method="post" action="/feed">
+                        <input type="text" name="email" placeholder="Email" class="form-control"> <br />
+                        <input type="text" name="username" placeholder="Username" class="form-control"><br />
+                        <textarea name="feedback" placeholder="Feedback" required="" class="form-control" rows="5"
+                            cols="15"></textarea><br />
+                        <input type="submit" value="Submit Feedback" class="btn btn-success">
+                    </form>
+                </div>
+
+                <div class="mssg bg-danger">
+                    <span id="feedbackMessage"></span>
+                </div>
+                <div id="LangTable"><a href="https://www.instagram.com/" id="aa"></a>
+                </div>
+                
+                <!-- Back to Home button -->
+                <button onclick="window.location.href = '/'" class="back-to-home-btn">Back to Home</button>
+            </div>
+        </div>
+    </div>
+    <script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>

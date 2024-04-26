@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Register App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="preload" as="image" href="./assets/images/hero-slider-1.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-2.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-3.jpg">
+
+    <style>
+        body {
+            background-image: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            /* background-color: rgb(0, 0, 0); */
+            background-position: center;
+            height: 100vh;
+            background-size: cover;
+            background-repeat: no-repeat;
+            text-align: center !important;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 30px;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        .form-card {
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(.5px);
+            border: 2px solid white;
+            box-shadow: 0px 0px 60px rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 10px;
+            margin-top: 130px;
+        }
+
+        .form-card p {
+            color: #fff;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .form-control::placeholder {
+            color: rgba(0, 0, 0, 0.534);
+            font-size: 20px;
+        }
+
+        .form-control {
+            border: 2px solid white;
+            border-radius: 50px;
+            height: 40px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            transition: 0.2s ease-out;
+        }
+
+        .form-control:focus {
+            border-color: violet;
+            color: black;
+            scale: 1.05;
+        }
+
+        .btn-success {
+            margin-top: 10px;
+            background-color: green;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 5px 20px;
+            border: 1px solid white;
+            border-radius: 20px;
+            transition: 0.2s ease-out;
+        }
+
+        .btn-success:hover {
+            background-color: blueviolet;
+            border-color: blueviolet;
+            box-shadow: 0px 0px 20px white;
+        }
+
+        .mssg {
+            margin-top: 10px;
+            text-align: center;
+            background-color: transparent;
+            color: red;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .mssg span {
+            display: block;
+            /* padding: 10px;
+            border-radius: 5px; */
+        }
+
+
+        .mssg.bg-success span {
+            background-color: #28a745;
+        }
+
+        a {
+            color: green;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: violet;
+        }
+
+        #ar-log {
+            color: white;
+        }
+
+        #LangTable {
+            margin-bottom: 15px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(() => {
+
+            $("#form1").submit((event) => {
+                event.preventDefault();
+
+                // Validate email format
+                let email = $("#email").val();
+                let emailPattern = /^[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[A-Za-z0-9](-*\.?[A-Za-z0-9])*\.[A-Za-z](-?[A-Za-z0-9])+$/;
+                if (!emailPattern.test(email)) {
+                    $("#check").text("Please enter a valid email address.");
+                    return;
+                } else {
+                    $("#emailError").text(""); // Clear error message
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/',
+                    data: $('#form1').serialize(),
+                    dataType: "json",
+                    success: (response) => {
+                        $('#form1')[0].reset();
+
+                        document.getElementById("check").innerHTML = response.Success;
+
+                        setTimeout(() => {
+                            document.getElementById("check").innerHTML = "";
+                        }, 3000);
+
+                        if (response.Success == "You are registered,You can login now.") {
+                            document.getElementById("aa").click();
+                        };
+                    },
+                    error: () => { }
+                })
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="preload" data-preaload>
+        <div class="circle"></div>
+        <p class="text">EZ Food</p>
+      </div>
+    <div class="col-md-4 col-md-offset-4 form-card">
+        <div>
+            <p>Register Now</p>
+        </div>
+        <div class="form-group">
+            <form id="form1" method="post">
+                <input type="text" id="email" name="email" placeholder="E-mail" required=""
+                    class="form-control"> <br />
+                <div id="emailError" class="mssg bg-danger"></div> <!-- Display email error message here -->
+                <input type="text" name="username" placeholder="Username" required="" class="form-control"><br />
+                <input type="password" name="password" placeholder="Password" required="" class="form-control"><br />
+                <input type="password" name="passwordConf" placeholder="Confirm Password" required=""
+                    class="form-control"><br />
+                <input type="submit" value="Register" class="btn btn-success">
+            </form>
+        </div>
+
+        <div class="mssg bg-danger">
+            <span id="check"></span>
+        </div>
+        <div>
+            <div id="ar-log">Already Registered! <a href="/login">Login</a></div>
+        </div>
+        <div id="LangTable"><a href="/login" id="aa"></a></div>
+    </div>
+    <script src="./assets/js/script.js"></script>
+
+
+</body>
+
+</html>

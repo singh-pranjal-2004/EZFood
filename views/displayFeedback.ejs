@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews</title>
+  <link rel="stylesheet" href="./css/loader.css">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-1.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-2.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-slider-3.jpg">
+
+  <style>
+    body {
+      /* background-image: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); */
+        background-image: url(assets/images/hero-slider-3.jpg);
+      font-family: Arial, sans-serif;
+      color: #fff;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 90vw;
+      margin-left: 5vw;
+      border-collapse: collapse;
+      margin-top: 20px;
+      overflow: hidden;
+
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(.5px);
+      border: 2px solid white;
+      box-shadow: 0px 0px 60px rgba(255, 255, 255, 0.5);
+      border-radius: 30px;
+      border-radius: 10px;
+    }
+
+    th, td {
+      border: 1px solid #fff;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #555;
+    }
+
+    tr:nth-child(even) {
+      background-color: #666;
+    }
+
+    tr:hover {
+      background-color: #888;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background-color: #fff;
+      margin: 10px 0;
+    }
+
+    /* Responsive Styling */
+    @media screen and (max-width: 500px) {
+      table {
+        width: 80vw;
+        margin-left: 4vw;
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="preload" data-preaload>
+    <div class="circle"></div>
+    <p class="text">EZ Food</p>
+  </div>
+  <h1>Reviews</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Feedback</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reviews.forEach(review => { %>
+        <tr>
+          <td><%= review.email %></td>
+          <td><%= review.username %></td>
+          <td><%= review.feedback %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <script src="./assets/js/script.js"></script>
+
+</body>
+</html>
