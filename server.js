@@ -15,7 +15,6 @@ const username = process.env.MONGODB_USERNAME;
 const password = process.env.MONGODB_PASSWORD;
 
 // MongoDB Atlas connection
-// mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.hurf1az.mongodb.net/registration`, {
 mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.hurf1az.mongodb.net/EZFood`, {
   useUnifiedTopology: true,
   useNewUrlParser: true
